@@ -4,6 +4,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     --white: hsl(0, 0%, 100%);
 
+    --gray-200: hsl(228, 33%, 97%);
     --gray-300: hsl(223, 19%, 93%);
     --gray-400: hsl(211, 10%, 45%);
     --gray-600: hsl(212, 24%, 26%);
@@ -21,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: hsl(223, 19%, 93%);
+    background: var(--gray-300);
   }
 
   .home-container {

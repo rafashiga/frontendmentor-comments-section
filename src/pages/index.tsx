@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import CommentsCard from 'components/CommentsCard';
+import InputCard from 'components/InputCard';
 
 const Home: NextPage = () => {
 	return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
 			</Head>
 			<section className='home-container'>
 				<CommentsCard />
+				<InputCard />
 			</section>
 		</div>
 	);

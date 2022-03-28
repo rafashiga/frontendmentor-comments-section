@@ -25,12 +25,19 @@ const GlobalStyles = createGlobalStyle`
     background: var(--gray-300);
   }
 
+  button {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
   .home-container {
     width: 75%;
     height: 100vh;
-    margin: 0 auto;
+    margin: 5rem auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 `;
 

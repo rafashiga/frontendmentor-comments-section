@@ -23,8 +23,8 @@ export const AvatarContainer = styled.div`
 `;
 
 export const AvatarImg = styled.img`
-	width: 3rem;
-	height: 3rem;
+	width: 2.5rem;
+	height: 2.5rem;
 `;
 
 export const Name = styled.span`

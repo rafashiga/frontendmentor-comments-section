@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { formatDistance } from 'date-fns';
 
 import InputStepper from 'components/InputStepper';
 import { Comment, User } from 'models/Comment';
@@ -52,7 +53,11 @@ function CommentsCard({ comment, currentUser }: CommentsCardProps) {
 						/>
 						<S.Name>{comment.user.username}</S.Name>
 						{isCurrentUser && <S.Tag>you</S.Tag>}
-						<S.Date> {comment.createdAt} </S.Date>
+						<S.Date>
+							{formatDistance(new Date(comment.createdAt), new Date(), {
+								addSuffix: true,
+							})}
+						</S.Date>
 					</S.AvatarContainer>
 					<S.Comment>
 						{comment.replyingTo && (

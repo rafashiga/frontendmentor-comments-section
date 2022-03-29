@@ -4,14 +4,22 @@ export const Container = styled.div`
 	width: 100%;
 	position: relative;
 	background-color: var(--white);
-	padding: 2rem;
 	border-radius: 0.5rem;
+	padding: 1rem;
 
 	display: flex;
+
+	@media (min-width: 768px) {
+		padding: 2rem;
+	}
 `;
 
 export const ScoreContainer = styled.div`
-	margin-right: 1.5rem;
+	display: none;
+	@media (min-width: 768px) {
+		display: block;
+		margin-right: 1.5rem;
+	}
 `;
 
 export const Content = styled.div``;
@@ -57,21 +65,25 @@ export const ReplyingTo = styled.span`
 `;
 
 export const ActionContainer = styled.div`
-	position: absolute;
-	top: 25%;
-	right: 2rem;
-
 	display: flex;
 	gap: 2rem;
+	margin-top: 1.25rem;
+
+	@media (min-width: 768px) {
+		position: absolute;
+		top: 25%;
+		right: 2rem;
+		margin-top: 0;
+	}
 `;
 
 export const PrimaryButton = styled.button`
+	cursor: pointer;
 	background: none;
 	border: none;
 	color: var(--color-primary);
 	font-weight: 700;
 	font-size: 1.125rem;
-	cursor: pointer;
 	transition: opacity 0.2s;
 
 	display: flex;

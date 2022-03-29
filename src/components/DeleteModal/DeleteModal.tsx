@@ -1,12 +1,14 @@
+/* eslint-disable react/no-unescaped-entities */
 import FocusTrap from 'focus-trap-react';
 import * as S from './DeleteModal.styles';
 
 interface DeleteModalProps {
 	isOpen: boolean;
 	toggleModal: () => void;
+	deleteComment: () => void;
 }
 
-function DeleteModal({ isOpen, toggleModal }: DeleteModalProps) {
+function DeleteModal({ isOpen, toggleModal, deleteComment }: DeleteModalProps) {
 	return (
 		<>
 			{isOpen && (
@@ -23,7 +25,7 @@ function DeleteModal({ isOpen, toggleModal }: DeleteModalProps) {
 								<S.CancelButton onClick={toggleModal}>
 									NO, CANCEL
 								</S.CancelButton>
-								<S.DeleteButton onClick={toggleModal}>
+								<S.DeleteButton onClick={deleteComment}>
 									YES, DELETE
 								</S.DeleteButton>
 							</S.ActionContainer>

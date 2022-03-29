@@ -7,16 +7,28 @@ import * as S from './CommentsCard.styles';
 import DeleteModal from 'components/DeleteModal';
 
 interface CommentsCardProps {
+	commentId?: number;
 	comment: Comment;
 	currentUser: User;
+	handleDeleteComment: (params: { id: number; commentId?: number }) => void;
 }
 
-function CommentsCard({ comment, currentUser }: CommentsCardProps) {
+function CommentsCard({
+	commentId,
+	comment,
+	currentUser,
+	handleDeleteComment,
+}: CommentsCardProps) {
 	const isCurrentUser = comment.user.username === currentUser.username;
 	const [isOpenModal, setIsOpenModal] = useState(false);
 
 	const toggleModal = () => {
 		setIsOpenModal(!isOpenModal);
+	};
+
+	const deleteComment = () => {
+		handleDeleteComment({ id: comment.id, commentId });
+		toggleModal();
 	};
 
 	const renderActionsButton = () => {
@@ -68,7 +80,11 @@ function CommentsCard({ comment, currentUser }: CommentsCardProps) {
 					<S.ActionContainer>{renderActionsButton()}</S.ActionContainer>
 				</S.Content>
 			</S.Container>
-			<DeleteModal isOpen={isOpenModal} toggleModal={toggleModal} />
+			<DeleteModal
+				isOpen={isOpenModal}
+				toggleModal={toggleModal}
+				deleteComment={deleteComment}
+			/>
 		</>
 	);
 }

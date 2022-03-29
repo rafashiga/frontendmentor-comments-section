@@ -3,14 +3,37 @@ import { Fragment, useState } from 'react';
 import Head from 'next/head';
 import * as S from 'styles/Home.styles';
 
-import data from '../../data.json';
-
 import { Comment, CommentData } from 'models/Comment';
 import CommentsCard from 'components/CommentsCard';
 import InputCard from 'components/InputCard';
 
+import data from '../../data.json';
+
 const Home: NextPage = () => {
 	const [comments, setComments] = useState<CommentData[]>(data.comments);
+
+	const handleDeleteComment = ({ id }: { id: number; commentId?: number }) => {
+		const newComments = comments.filter((comment) => comment.id !== id);
+		setComments(newComments);
+	};
+
+	const handleDeleteReply = ({
+		id,
+		commentId,
+	}: {
+		id: number;
+		commentId?: number;
+	}) => {
+		const commentFiltered = comments.find(
+			(comment) => comment.id === commentId
+		);
+		const index = comments.findIndex((comment) => comment.id === commentId);
+		const repliesFiltered = commentFiltered?.replies?.filter(
+			(reply) => reply.id !== id
+		);
+		comments[index].replies = repliesFiltered;
+		setComments([...comments]);
+	};
 
 	const handleSubmitComment = (comment: string) => {
 		const newComment: CommentData = {
@@ -27,7 +50,7 @@ const Home: NextPage = () => {
 		setComments([...comments, newComment]);
 	};
 
-	const renderReply = (replies?: Comment[]) => {
+	const renderReply = (commentId: number, replies?: Comment[]) => {
 		if (replies?.length) {
 			return (
 				<S.ReplyContainer>
@@ -35,7 +58,9 @@ const Home: NextPage = () => {
 						<CommentsCard
 							key={reply.id}
 							comment={reply}
+							commentId={commentId}
 							currentUser={data.currentUser}
+							handleDeleteComment={handleDeleteReply}
 						/>
 					))}
 				</S.ReplyContainer>
@@ -54,8 +79,12 @@ const Home: NextPage = () => {
 			<S.Container>
 				{comments.map((comment) => (
 					<Fragment key={comment.id}>
-						<CommentsCard comment={comment} currentUser={data.currentUser} />
-						{renderReply(comment.replies)}
+						<CommentsCard
+							comment={comment}
+							currentUser={data.currentUser}
+							handleDeleteComment={handleDeleteComment}
+						/>
+						{renderReply(comment.id, comment.replies)}
 					</Fragment>
 				))}
 				<InputCard

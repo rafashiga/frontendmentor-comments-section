@@ -11,6 +11,13 @@ export const Container = styled.section`
 	gap: 1rem;
 `;
 
+export const CommentsContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+`;
+
 export const ReplyContainer = styled.div`
 	margin-left: 3rem;
 	padding-left: 2.5rem;

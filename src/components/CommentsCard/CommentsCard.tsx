@@ -1,12 +1,35 @@
 import InputStepper from 'components/InputStepper';
-import { Comment } from 'models/Comment';
+import { Comment, User } from 'models/Comment';
 import * as S from './CommentsCard.styles';
 
 interface CommentsCardProps {
 	comment: Comment;
+	currentUser: User;
 }
 
-function CommentsCard({ comment }: CommentsCardProps) {
+function CommentsCard({ comment, currentUser }: CommentsCardProps) {
+	const isCurrentUser = comment.user.username === currentUser.username;
+
+	const renderActionsButton = () => {
+		if (isCurrentUser) {
+			return (
+				<>
+					<S.DeleteButton type='button'>
+						<S.Icon src='/images/icon-delete.svg' /> Delete
+					</S.DeleteButton>
+					<S.PrimaryButton type='button'>
+						<S.Icon src='/images/icon-edit.svg' /> Edit
+					</S.PrimaryButton>
+				</>
+			);
+		}
+		return (
+			<S.PrimaryButton type='button'>
+				<S.Icon src='/images/icon-reply.svg' /> Reply
+			</S.PrimaryButton>
+		);
+	};
+
 	return (
 		<S.Container>
 			<S.ScoreContainer>
@@ -19,6 +42,7 @@ function CommentsCard({ comment }: CommentsCardProps) {
 						alt={comment.user.username}
 					/>
 					<S.Name>{comment.user.username}</S.Name>
+					{isCurrentUser && <S.Tag>you</S.Tag>}
 					<S.Date> {comment.createdAt} </S.Date>
 				</S.AvatarContainer>
 				<S.Comment>
@@ -27,9 +51,7 @@ function CommentsCard({ comment }: CommentsCardProps) {
 					)}
 					{comment.content}
 				</S.Comment>
-				<S.ReplyButton type='button'>
-					<S.ReplyIcon src='/images/icon-reply.svg' /> Reply
-				</S.ReplyButton>
+				<S.ActionContainer>{renderActionsButton()}</S.ActionContainer>
 			</S.Content>
 		</S.Container>
 	);

@@ -11,6 +11,8 @@ const GlobalStyles = createGlobalStyle`
 
     --color-primary: hsl(238, 40%, 52%);
     --color-primary-light: hsl(239, 57%, 85%);
+
+    --color-danger: hsl(358, 79%, 66%);
   }
   
   * {

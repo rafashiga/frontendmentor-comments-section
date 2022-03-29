@@ -14,7 +14,11 @@ const Home: NextPage = () => {
 			return (
 				<S.ReplyContainer>
 					{replies.map((reply) => (
-						<CommentsCard key={reply.id} comment={reply} />
+						<CommentsCard
+							key={reply.id}
+							comment={reply}
+							currentUser={data.currentUser}
+						/>
 					))}
 				</S.ReplyContainer>
 			);
@@ -31,10 +35,10 @@ const Home: NextPage = () => {
 			</Head>
 			<S.Container>
 				{data.comments.map((comment) => (
-					<>
-						<CommentsCard key={comment.id} comment={comment} />
+					<S.CommentsContainer key={comment.id}>
+						<CommentsCard comment={comment} currentUser={data.currentUser} />
 						{renderReply(comment.replies)}
-					</>
+					</S.CommentsContainer>
 				))}
 				<InputCard user={data.currentUser} />
 			</S.Container>

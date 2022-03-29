@@ -19,7 +19,7 @@ export const Content = styled.div``;
 export const AvatarContainer = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 1rem;
+	gap: 0.75rem;
 `;
 
 export const AvatarImg = styled.img`
@@ -37,6 +37,14 @@ export const Date = styled.span`
 	font-weight: 500;
 `;
 
+export const Tag = styled.span`
+	background-color: var(--color-primary);
+	color: var(--white);
+	padding: 2px 8px;
+	border-radius: 4px;
+	margin-left: -4px;
+`;
+
 export const Comment = styled.div`
 	color: var(--gray-400);
 	margin-top: 1.5rem;
@@ -48,7 +56,16 @@ export const ReplyingTo = styled.span`
 	font-weight: 700;
 `;
 
-export const ReplyButton = styled.button`
+export const ActionContainer = styled.div`
+	position: absolute;
+	top: 25%;
+	right: 2rem;
+
+	display: flex;
+	gap: 2rem;
+`;
+
+export const PrimaryButton = styled.button`
 	background: none;
 	border: none;
 	color: var(--color-primary);
@@ -56,10 +73,6 @@ export const ReplyButton = styled.button`
 	font-size: 1.125rem;
 	cursor: pointer;
 	transition: opacity 0.2s;
-
-	position: absolute;
-	top: 25%;
-	right: 2rem;
 
 	display: flex;
 	align-items: center;
@@ -70,4 +83,22 @@ export const ReplyButton = styled.button`
 	}
 `;
 
-export const ReplyIcon = styled.img``;
+export const DeleteButton = styled.button`
+	background: none;
+	border: none;
+	color: var(--color-danger);
+	font-weight: 700;
+	font-size: 1.125rem;
+	cursor: pointer;
+	transition: opacity 0.2s;
+
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+
+	&:hover {
+		opacity: 0.7;
+	}
+`;
+
+export const Icon = styled.img``;

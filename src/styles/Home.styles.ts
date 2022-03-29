@@ -16,13 +16,6 @@ export const Container = styled.section`
 	}
 `;
 
-export const CommentsContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1rem;
-`;
-
 export const ReplyContainer = styled.div`
 	padding-left: 1rem;
 	border-left: 2px solid var(--gray-300);

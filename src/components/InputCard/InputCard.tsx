@@ -1,16 +1,31 @@
 import { User } from 'models/Comment';
+import { useState } from 'react';
 import * as S from './InputCard.styles';
 
 interface InputCardProps {
 	user: User;
+	buttonLabel: 'REPLY' | 'SEND';
+	onSubmit: (comment: string) => void;
 }
 
-function InputCard({ user }: InputCardProps) {
+function InputCard({ user, buttonLabel, onSubmit }: InputCardProps) {
+	const [comment, setComment] = useState('');
+
+	const handleSubmit = (event: React.FormEvent) => {
+		event.preventDefault();
+		onSubmit(comment);
+		setComment('');
+	};
+
 	return (
-		<S.Container>
+		<S.Container onSubmit={handleSubmit}>
 			<S.AvatarImg src={user.image.png} alt={user.username} />
-			<S.Textarea placeholder='Add a comment...' />
-			<S.Button> Reply </S.Button>
+			<S.Textarea
+				placeholder='Add a comment...'
+				value={comment}
+				onChange={(e) => setComment(e.target.value)}
+			/>
+			<S.Button type='submit'> {buttonLabel} </S.Button>
 		</S.Container>
 	);
 }

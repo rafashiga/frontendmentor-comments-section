@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.form`
 	width: 100%;
 	background-color: var(--white);
 	border-radius: 0.5rem;
@@ -35,6 +35,7 @@ export const Textarea = styled.textarea`
 	border: 1px solid var(--gray-300);
 
 	font-size: 1rem;
+	line-height: 1.5rem;
 	color: var(--gray-600);
 
 	&:hover,

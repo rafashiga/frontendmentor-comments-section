@@ -57,6 +57,8 @@ export const Comment = styled.div`
 	color: var(--gray-400);
 	margin-top: 1.5rem;
 	line-height: 1.5rem;
+	white-space: pre-line;
+	word-break: break-word;
 `;
 
 export const ReplyingTo = styled.span`

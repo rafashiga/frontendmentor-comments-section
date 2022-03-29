@@ -16,3 +16,7 @@ export type Comment = {
 	user: User;
 	replyingTo?: string;
 };
+
+export type CommentData = Comment & {
+	replies?: Comment[];
+};

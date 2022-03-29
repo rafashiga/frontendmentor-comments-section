@@ -43,6 +43,11 @@ export const Comment = styled.div`
 	line-height: 1.5rem;
 `;
 
+export const ReplyingTo = styled.span`
+	color: var(--color-primary);
+	font-weight: 700;
+`;
+
 export const ReplyButton = styled.button`
 	background: none;
 	border: none;

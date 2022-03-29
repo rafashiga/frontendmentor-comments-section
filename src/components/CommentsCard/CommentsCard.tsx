@@ -1,29 +1,31 @@
-import { ReactNode } from 'react';
-
 import InputStepper from 'components/InputStepper';
+import { Comment } from 'models/Comment';
 import * as S from './CommentsCard.styles';
 
 interface CommentsCardProps {
-	children: ReactNode;
+	comment: Comment;
 }
 
-function CommentsCard() {
+function CommentsCard({ comment }: CommentsCardProps) {
 	return (
 		<S.Container>
 			<S.ScoreContainer>
-				<InputStepper />
+				<InputStepper score={comment.score} />
 			</S.ScoreContainer>
 			<S.Content>
 				<S.AvatarContainer>
-					<S.AvatarImg src='/images/avatars/image-amyrobson.png' alt='Avatar' />
-					<S.Name>podpoasdjaso</S.Name>
-					<S.Date> 1 month ago </S.Date>
+					<S.AvatarImg
+						src={comment.user.image.png}
+						alt={comment.user.username}
+					/>
+					<S.Name>{comment.user.username}</S.Name>
+					<S.Date> {comment.createdAt} </S.Date>
 				</S.AvatarContainer>
 				<S.Comment>
-					Eu enim magna ad culpa mollit est ad officia tempor aliquip dolore
-					est. Esse non elit enim dolor officia ex nisi non amet excepteur
-					ipsum. Cillum in eu eiusmod sint consectetur nulla adipisicing
-					exercitation id cupidatat quis non.
+					{comment.replyingTo && (
+						<S.ReplyingTo>@{comment.replyingTo} </S.ReplyingTo>
+					)}
+					{comment.content}
 				</S.Comment>
 				<S.ReplyButton type='button'>
 					<S.ReplyIcon src='/images/icon-reply.svg' /> Reply

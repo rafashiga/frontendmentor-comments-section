@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import * as S from './InputStepper.styles';
 
-interface InputStepperProps {}
+interface InputStepperProps {
+	score: number;
+}
 
-function InputStepper() {
-	const [total, setTotal] = useState(0);
+function InputStepper({ score }: InputStepperProps) {
+	const [total, setTotal] = useState(score);
 
 	const handleIncrease = () => {
 		setTotal(total + 1);

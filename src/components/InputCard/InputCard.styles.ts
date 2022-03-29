@@ -20,6 +20,7 @@ export const Textarea = styled.textarea`
 	width: 100%;
 	padding: 1rem 2rem;
 	border-radius: 0.5rem;
+	border: 1px solid var(--gray-300);
 
 	font-size: 1rem;
 	color: var(--gray-600);

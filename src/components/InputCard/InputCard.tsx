@@ -1,11 +1,14 @@
+import { User } from 'models/Comment';
 import * as S from './InputCard.styles';
 
-interface InputCardProps {}
+interface InputCardProps {
+	user: User;
+}
 
-function InputCard() {
+function InputCard({ user }: InputCardProps) {
 	return (
 		<S.Container>
-			<S.AvatarImg src='/images/avatars/image-amyrobson.png' alt='Avatar' />
+			<S.AvatarImg src={user.image.png} alt={user.username} />
 			<S.Textarea placeholder='Add a comment...' />
 			<S.Button> Reply </S.Button>
 		</S.Container>

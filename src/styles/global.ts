@@ -22,22 +22,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: var(--gray-300);
+    background: var(--gray-200);
   }
 
   button {
     font-size: 1rem;
     cursor: pointer;
-  }
-
-  .home-container {
-    width: 75%;
-    height: 100vh;
-    margin: 5rem auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
   }
 `;
 

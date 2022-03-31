@@ -9,7 +9,7 @@ import InputCard from 'components/InputCard';
 
 interface CommentsCardProps {
 	commentId?: number;
-	comment: Comment;
+	data: Comment;
 	currentUser: User;
 	deleteComment: (props: { id: number; commentId?: number }) => void;
 	submitReply?: (props: {
@@ -21,12 +21,12 @@ interface CommentsCardProps {
 
 function CommentsCard({
 	commentId,
-	comment,
+	data,
 	currentUser,
 	deleteComment,
 	submitReply,
 }: CommentsCardProps) {
-	const isCurrentUser = comment.user.username === currentUser.username;
+	const isCurrentUser = data.user.username === currentUser.username;
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const [showReplyInput, setShowReplyInput] = useState(false);
 
@@ -35,7 +35,7 @@ function CommentsCard({
 	};
 
 	const handleDeleteComment = () => {
-		deleteComment({ id: comment.id, commentId });
+		deleteComment({ id: data.id, commentId });
 		toggleModal();
 	};
 
@@ -45,9 +45,9 @@ function CommentsCard({
 
 	const handleSubmitReply = (text: string) => {
 		submitReply!({
-			replyUser: comment.user,
+			replyUser: data.user,
 			comment: text,
-			comentId: commentId ?? comment.id,
+			comentId: commentId ?? data.id,
 		});
 		handleToggleReply();
 	};
@@ -76,27 +76,24 @@ function CommentsCard({
 		<>
 			<S.Container>
 				<S.ScoreContainer>
-					<InputStepper score={comment.score} />
+					<InputStepper score={data.score} />
 				</S.ScoreContainer>
 				<S.Content>
 					<S.AvatarContainer>
-						<S.AvatarImg
-							src={comment.user.image.png}
-							alt={comment.user.username}
-						/>
-						<S.Name>{comment.user.username}</S.Name>
+						<S.AvatarImg src={data.user.image.png} alt={data.user.username} />
+						<S.Name>{data.user.username}</S.Name>
 						{isCurrentUser && <S.Tag>you</S.Tag>}
 						<S.Date>
-							{formatDistance(new Date(comment.createdAt), new Date(), {
+							{formatDistance(new Date(data.createdAt), new Date(), {
 								addSuffix: true,
 							})}
 						</S.Date>
 					</S.AvatarContainer>
 					<S.Comment>
-						{comment.replyingTo && (
-							<S.ReplyingTo>@{comment.replyingTo} </S.ReplyingTo>
+						{data.replyingTo && (
+							<S.ReplyingTo>@{data.replyingTo} </S.ReplyingTo>
 						)}
-						{comment.content}
+						{data.content}
 					</S.Comment>
 					<S.ActionContainer>{renderActionsButton()}</S.ActionContainer>
 				</S.Content>
@@ -104,7 +101,7 @@ function CommentsCard({
 			{showReplyInput && (
 				<InputCard
 					buttonLabel='REPLY'
-					replyUser={comment.user.username}
+					replyUser={data.user.username}
 					user={currentUser}
 					onSubmit={handleSubmitReply}
 				/>

@@ -80,7 +80,7 @@ const Home: NextPage = () => {
 					{replies.map((reply) => (
 						<CommentsCard
 							key={reply.id}
-							comment={reply}
+							data={reply}
 							commentId={commentId}
 							currentUser={data.currentUser}
 							deleteComment={handleDeleteReply}
@@ -104,7 +104,7 @@ const Home: NextPage = () => {
 				{comments.map((comment) => (
 					<Fragment key={comment.id}>
 						<CommentsCard
-							comment={comment}
+							data={comment}
 							currentUser={data.currentUser}
 							deleteComment={handleDeleteComment}
 							submitReply={handleSubmitReply}

@@ -13,14 +13,20 @@ export const Background = styled.div`
 export const Container = styled.div`
 	position: fixed;
 	margin: auto;
-	top: 50%;
 	left: 0;
 	right: 0;
-	width: 40%;
+	top: 20%;
+	width: 90%;
+
 	background: var(--white);
 	z-index: 999;
 	padding: 2rem;
 	border-radius: 0.5rem;
+
+	@media (min-width: 768px) {
+		top: 25%;
+		width: 40%;
+	}
 `;
 
 export const Title = styled.h1`

@@ -1,14 +1,15 @@
 import { User } from 'models/Comment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './InputCard.styles';
 
 interface InputCardProps {
 	user: User;
+	replyUser?: string;
 	buttonLabel: 'REPLY' | 'SEND';
 	onSubmit: (comment: string) => void;
 }
 
-function InputCard({ user, buttonLabel, onSubmit }: InputCardProps) {
+function InputCard({ user, buttonLabel, onSubmit, replyUser }: InputCardProps) {
 	const [comment, setComment] = useState('');
 
 	const handleSubmit = (event: React.FormEvent) => {
@@ -16,6 +17,12 @@ function InputCard({ user, buttonLabel, onSubmit }: InputCardProps) {
 		onSubmit(comment);
 		setComment('');
 	};
+
+	useEffect(() => {
+		if (replyUser) {
+			setComment(`@${replyUser} `);
+		}
+	}, [replyUser]);
 
 	return (
 		<S.Container onSubmit={handleSubmit}>

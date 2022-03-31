@@ -17,6 +17,7 @@ export const Container = styled.section`
 `;
 
 export const ReplyContainer = styled.div`
+	width: -webkit-fill-available;
 	padding-left: 1rem;
 	border-left: 2px solid var(--gray-300);
 

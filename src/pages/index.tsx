@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react';
 import Head from 'next/head';
 import * as S from 'styles/Home.styles';
 
-import { Comment, CommentData } from 'models/Comment';
+import { Comment, CommentData, User } from 'models/Comment';
 import CommentsCard from 'components/CommentsCard';
 import InputCard from 'components/InputCard';
 
@@ -35,6 +35,29 @@ const Home: NextPage = () => {
 		setComments([...comments]);
 	};
 
+	const handleSubmitReply = (props: {
+		replyUser: User;
+		comment: string;
+		comentId: number;
+	}) => {
+		const { replyUser, comment, comentId } = props;
+		const commentFiltered = comments.find((comment) => comment.id === comentId);
+		const index = comments.findIndex((comment) => comment.id === comentId);
+		const replies = commentFiltered?.replies || [];
+		const newReply: Comment = {
+			id: replies.length + 1,
+			score: 0,
+			user: {
+				...data.currentUser,
+			},
+			replyingTo: replyUser.username,
+			createdAt: new Date().toISOString(),
+			content: comment.substring(comment.indexOf(' ') + 1),
+		};
+		comments[index].replies = [...replies, newReply];
+		setComments([...comments]);
+	};
+
 	const handleSubmitComment = (comment: string) => {
 		const newComment: CommentData = {
 			id: comments.length + 1,
@@ -60,7 +83,8 @@ const Home: NextPage = () => {
 							comment={reply}
 							commentId={commentId}
 							currentUser={data.currentUser}
-							handleDeleteComment={handleDeleteReply}
+							deleteComment={handleDeleteReply}
+							submitReply={handleSubmitReply}
 						/>
 					))}
 				</S.ReplyContainer>
@@ -82,7 +106,8 @@ const Home: NextPage = () => {
 						<CommentsCard
 							comment={comment}
 							currentUser={data.currentUser}
-							handleDeleteComment={handleDeleteComment}
+							deleteComment={handleDeleteComment}
+							submitReply={handleSubmitReply}
 						/>
 						{renderReply(comment.id, comment.replies)}
 					</Fragment>

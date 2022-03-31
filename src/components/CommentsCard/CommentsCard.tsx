@@ -5,30 +5,51 @@ import InputStepper from 'components/InputStepper';
 import { Comment, User } from 'models/Comment';
 import * as S from './CommentsCard.styles';
 import DeleteModal from 'components/DeleteModal';
+import InputCard from 'components/InputCard';
 
 interface CommentsCardProps {
 	commentId?: number;
 	comment: Comment;
 	currentUser: User;
-	handleDeleteComment: (params: { id: number; commentId?: number }) => void;
+	deleteComment: (props: { id: number; commentId?: number }) => void;
+	submitReply?: (props: {
+		replyUser: User;
+		comment: string;
+		comentId: number;
+	}) => void;
 }
 
 function CommentsCard({
 	commentId,
 	comment,
 	currentUser,
-	handleDeleteComment,
+	deleteComment,
+	submitReply,
 }: CommentsCardProps) {
 	const isCurrentUser = comment.user.username === currentUser.username;
 	const [isOpenModal, setIsOpenModal] = useState(false);
+	const [showReplyInput, setShowReplyInput] = useState(false);
 
 	const toggleModal = () => {
 		setIsOpenModal(!isOpenModal);
 	};
 
-	const deleteComment = () => {
-		handleDeleteComment({ id: comment.id, commentId });
+	const handleDeleteComment = () => {
+		deleteComment({ id: comment.id, commentId });
 		toggleModal();
+	};
+
+	const handleToggleReply = () => {
+		setShowReplyInput(!showReplyInput);
+	};
+
+	const handleSubmitReply = (text: string) => {
+		submitReply!({
+			replyUser: comment.user,
+			comment: text,
+			comentId: commentId ?? comment.id,
+		});
+		handleToggleReply();
 	};
 
 	const renderActionsButton = () => {
@@ -45,7 +66,7 @@ function CommentsCard({
 			);
 		}
 		return (
-			<S.PrimaryButton type='button'>
+			<S.PrimaryButton type='button' onClick={handleToggleReply}>
 				<S.Icon src='/images/icon-reply.svg' /> Reply
 			</S.PrimaryButton>
 		);
@@ -80,10 +101,18 @@ function CommentsCard({
 					<S.ActionContainer>{renderActionsButton()}</S.ActionContainer>
 				</S.Content>
 			</S.Container>
+			{showReplyInput && (
+				<InputCard
+					buttonLabel='REPLY'
+					replyUser={comment.user.username}
+					user={currentUser}
+					onSubmit={handleSubmitReply}
+				/>
+			)}
 			<DeleteModal
 				isOpen={isOpenModal}
 				toggleModal={toggleModal}
-				deleteComment={deleteComment}
+				deleteComment={handleDeleteComment}
 			/>
 		</>
 	);

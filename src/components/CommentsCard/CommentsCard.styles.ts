@@ -68,7 +68,7 @@ export const ReplyingTo = styled.span`
 
 export const ActionContainer = styled.div`
 	display: flex;
-	gap: 2rem;
+	gap: 1rem;
 	margin-top: 1.25rem;
 
 	@media (min-width: 768px) {
@@ -76,6 +76,7 @@ export const ActionContainer = styled.div`
 		top: 25%;
 		right: 2rem;
 		margin-top: 0;
+		gap: 2rem;
 	}
 `;
 
@@ -85,7 +86,7 @@ export const PrimaryButton = styled.button`
 	border: none;
 	color: var(--color-primary);
 	font-weight: 700;
-	font-size: 1.125rem;
+	font-size: 1rem;
 	transition: opacity 0.2s;
 
 	display: flex;
@@ -95,6 +96,10 @@ export const PrimaryButton = styled.button`
 	&:hover {
 		opacity: 0.7;
 	}
+
+	@media (min-width: 768px) {
+		font-size: 1.125rem;
+	}
 `;
 
 export const DeleteButton = styled.button`
@@ -102,7 +107,7 @@ export const DeleteButton = styled.button`
 	border: none;
 	color: var(--color-danger);
 	font-weight: 700;
-	font-size: 1.125rem;
+	font-size: 1rem;
 	cursor: pointer;
 	transition: opacity 0.2s;
 
@@ -113,6 +118,12 @@ export const DeleteButton = styled.button`
 	&:hover {
 		opacity: 0.7;
 	}
+
+	@media (min-width: 768px) {
+		font-size: 1.125rem;
+	}
 `;
 
-export const Icon = styled.img``;
+export const Icon = styled.img`
+	width: 0.75rem;
+`;

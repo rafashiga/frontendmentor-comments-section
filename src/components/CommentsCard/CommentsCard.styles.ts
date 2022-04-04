@@ -69,9 +69,9 @@ export const ReplyingTo = styled.span`
 export const ActionContainer = styled.div`
 	display: flex;
 	gap: 1rem;
-	margin-top: 1.25rem;
 
 	@media (min-width: 768px) {
+		margin-top: 1.25rem;
 		position: absolute;
 		top: 25%;
 		right: 2rem;
@@ -126,4 +126,19 @@ export const DeleteButton = styled.button`
 
 export const Icon = styled.img`
 	width: 0.75rem;
+`;
+
+export const Footer = styled.div`
+	@media (max-width: 768px) {
+		margin-top: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+`;
+
+export const InputContainer = styled.div`
+	@media (min-width: 768px) {
+		display: none;
+	}
 `;

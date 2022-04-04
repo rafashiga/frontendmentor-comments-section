@@ -95,7 +95,13 @@ function CommentsCard({
 						)}
 						{data.content}
 					</S.Comment>
-					<S.ActionContainer>{renderActionsButton()}</S.ActionContainer>
+
+					<S.Footer>
+						<S.InputContainer>
+							<InputStepper score={data.score} />
+						</S.InputContainer>
+						<S.ActionContainer>{renderActionsButton()}</S.ActionContainer>
+					</S.Footer>
 				</S.Content>
 			</S.Container>
 			{showReplyInput && (

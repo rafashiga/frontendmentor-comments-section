@@ -30,3 +30,19 @@ export const ReplyContainer = styled.div`
 		padding-left: 2.5rem;
 	}
 `;
+
+export const Footer = styled.footer`
+	text-align: center;
+	color: var(--gray-600);
+	font-size: 0.875rem;
+	margin: 1rem 0;
+	transition: all 0.2s;
+
+	a {
+		color: var(--color-primary);
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+`;

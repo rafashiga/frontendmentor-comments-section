@@ -58,6 +58,38 @@ const Home: NextPage = () => {
 		setComments([...comments]);
 	};
 
+	const handleUpdateReply = (props: {
+		comment: string;
+		commentId?: number;
+		id: number;
+	}) => {
+		const { comment, commentId, id } = props;
+		const commentFiltered = comments.find(
+			(comment) => comment.id === commentId
+		);
+		const commentIndex = comments.findIndex(
+			(comment) => comment.id === commentId
+		);
+		const replyIndex = commentFiltered?.replies!.findIndex(
+			(reply) => reply.id === id
+		);
+		if (replyIndex && commentIndex) {
+			comments[commentIndex].replies![replyIndex].content = comment;
+			setComments([...comments]);
+		}
+	};
+
+	const handleUpdateComment = (props: {
+		comment: string;
+		commentId?: number;
+		id: number;
+	}) => {
+		const { comment, id } = props;
+		const index = comments.findIndex((comment) => comment.id === id);
+		comments[index].content = comment;
+		setComments([...comments]);
+	};
+
 	const handleSubmitComment = (comment: string) => {
 		const newComment: CommentData = {
 			id: comments.length + 1,
@@ -85,6 +117,7 @@ const Home: NextPage = () => {
 							currentUser={data.currentUser}
 							deleteComment={handleDeleteReply}
 							submitReply={handleSubmitReply}
+							updateComment={handleUpdateReply}
 						/>
 					))}
 				</S.ReplyContainer>
@@ -108,6 +141,7 @@ const Home: NextPage = () => {
 							currentUser={data.currentUser}
 							deleteComment={handleDeleteComment}
 							submitReply={handleSubmitReply}
+							updateComment={handleUpdateComment}
 						/>
 						{renderReply(comment.id, comment.replies)}
 					</Fragment>

@@ -22,7 +22,9 @@ export const ScoreContainer = styled.div`
 	}
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+	width: 100%;
+`;
 
 export const AvatarContainer = styled.div`
 	display: flex;
@@ -66,6 +68,52 @@ export const ReplyingTo = styled.span`
 	font-weight: 700;
 `;
 
+export const FormContainer = styled.form`
+	margin-top: 1rem;
+	text-align: right;
+`;
+
+export const Texarea = styled.textarea`
+	width: 100%;
+	padding: 1rem 2rem;
+	border-radius: 0.5rem;
+	border: 1px solid var(--gray-300);
+
+	font-size: 1rem;
+	line-height: 1.5rem;
+	color: var(--gray-600);
+
+	&:hover,
+	&:focus {
+		outline: none;
+		border: 1px solid var(--color-primary);
+	}
+
+	&::placeholder {
+		color: var(--gray-400);
+		font-weight: 400;
+	}
+
+	@media (min-width: 768px) {
+		margin-bottom: 0;
+	}
+`;
+
+export const UpdateButton = styled.button`
+	margin-top: 0.5rem;
+	background: var(--color-primary);
+	color: var(--white);
+	border: none;
+	padding: 0.75rem 1.75rem;
+	border-radius: 0.5rem;
+	text-transform: uppercase;
+	transition: opacity 0.2s;
+
+	&:hover {
+		opacity: 0.75;
+	}
+`;
+
 export const ActionContainer = styled.div`
 	display: flex;
 	gap: 1rem;
@@ -73,7 +121,7 @@ export const ActionContainer = styled.div`
 	@media (min-width: 768px) {
 		margin-top: 1.25rem;
 		position: absolute;
-		top: 25%;
+		top: 2.5rem;
 		right: 2rem;
 		margin-top: 0;
 		gap: 2rem;

@@ -17,6 +17,11 @@ interface CommentsCardProps {
 		comment: string;
 		comentId: number;
 	}) => void;
+	updateComment: (props: {
+		comment: string;
+		commentId?: number;
+		id: number;
+	}) => void;
 }
 
 function CommentsCard({
@@ -25,13 +30,27 @@ function CommentsCard({
 	currentUser,
 	deleteComment,
 	submitReply,
+	updateComment,
 }: CommentsCardProps) {
 	const isCurrentUser = data.user.username === currentUser.username;
 	const [isOpenModal, setIsOpenModal] = useState(false);
+	const [comment, setComment] = useState(
+		`${data.replyingTo ? `@${data.replyingTo} ` : ''}${data.content}`
+	);
+	const [showEdit, setShowEdit] = useState(false);
 	const [showReplyInput, setShowReplyInput] = useState(false);
 
 	const toggleModal = () => {
 		setIsOpenModal(!isOpenModal);
+	};
+
+	const getComment = () => {
+		return (
+			<>
+				{data.replyingTo && <S.ReplyingTo>@{data.replyingTo} </S.ReplyingTo>}
+				{data.content}
+			</>
+		);
 	};
 
 	const handleDeleteComment = () => {
@@ -59,7 +78,7 @@ function CommentsCard({
 					<S.DeleteButton type='button' onClick={toggleModal}>
 						<S.Icon src='/images/icon-delete.svg' /> Delete
 					</S.DeleteButton>
-					<S.PrimaryButton type='button'>
+					<S.PrimaryButton type='button' onClick={() => setShowEdit(!showEdit)}>
 						<S.Icon src='/images/icon-edit.svg' /> Edit
 					</S.PrimaryButton>
 				</>
@@ -70,6 +89,16 @@ function CommentsCard({
 				<S.Icon src='/images/icon-reply.svg' /> Reply
 			</S.PrimaryButton>
 		);
+	};
+
+	const handleUpdateComment = (e: React.FormEvent) => {
+		e.preventDefault();
+		updateComment({
+			comment,
+			commentId,
+			id: data.id,
+		});
+		setShowEdit(false);
 	};
 
 	return (
@@ -89,13 +118,17 @@ function CommentsCard({
 							})}
 						</S.Date>
 					</S.AvatarContainer>
-					<S.Comment>
-						{data.replyingTo && (
-							<S.ReplyingTo>@{data.replyingTo} </S.ReplyingTo>
-						)}
-						{data.content}
-					</S.Comment>
-
+					{!showEdit ? (
+						<S.Comment>{getComment()}</S.Comment>
+					) : (
+						<S.FormContainer onSubmit={handleUpdateComment}>
+							<S.Texarea
+								value={comment}
+								onChange={(e) => setComment(e.target.value)}
+							></S.Texarea>
+							<S.UpdateButton type='submit'>UPDATE</S.UpdateButton>
+						</S.FormContainer>
+					)}
 					<S.Footer>
 						<S.InputContainer>
 							<InputStepper score={data.score} />

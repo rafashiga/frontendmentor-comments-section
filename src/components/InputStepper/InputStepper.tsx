@@ -19,11 +19,11 @@ function InputStepper({ score }: InputStepperProps) {
 	return (
 		<S.Container>
 			<S.Button type='button' onClick={handleIncrease} aria-label='encrease 1'>
-				<S.Icon src='/images/icon-plus.svg' />
+				<S.Icon src='/images/icon-plus.svg' alt='plus icon' />
 			</S.Button>
 			<S.Input type='text' value={total} readOnly />
 			<S.Button type='button' onClick={handleDecrease} aria-label='decrease 1'>
-				<S.Icon src='/images/icon-minus.svg' />
+				<S.Icon src='/images/icon-minus.svg' alt='minus icon' />
 			</S.Button>
 		</S.Container>
 	);

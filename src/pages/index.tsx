@@ -128,7 +128,7 @@ const Home: NextPage = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<Head>
 				<title>Shiga Project: Comments Section</title>
 				<meta name='description' content='Comments Section' />
@@ -168,7 +168,7 @@ const Home: NextPage = () => {
 				</Link>
 				.
 			</S.Footer>
-		</div>
+		</>
 	);
 };
 

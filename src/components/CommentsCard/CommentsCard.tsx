@@ -76,17 +76,17 @@ function CommentsCard({
 			return (
 				<>
 					<S.DeleteButton type='button' onClick={toggleModal}>
-						<S.Icon src='/images/icon-delete.svg' /> Delete
+						<S.Icon src='/images/icon-delete.svg' alt='delete icon' /> Delete
 					</S.DeleteButton>
 					<S.PrimaryButton type='button' onClick={() => setShowEdit(!showEdit)}>
-						<S.Icon src='/images/icon-edit.svg' /> Edit
+						<S.Icon src='/images/icon-edit.svg' alt='edit icon' /> Edit
 					</S.PrimaryButton>
 				</>
 			);
 		}
 		return (
 			<S.PrimaryButton type='button' onClick={handleToggleReply}>
-				<S.Icon src='/images/icon-reply.svg' /> Reply
+				<S.Icon src='/images/icon-reply.svg' alt='reply icon' /> Reply
 			</S.PrimaryButton>
 		);
 	};
